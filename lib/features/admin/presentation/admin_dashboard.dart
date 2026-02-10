@@ -2,6 +2,7 @@
 ///
 /// Hosts administrative features; keep this file focused on presentation
 /// only, and move complex logic to dedicated controllers/services.
+library;
 import 'package:flutter/material.dart';
 
 class AdminDashboard extends StatelessWidget {

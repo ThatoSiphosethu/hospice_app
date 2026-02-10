@@ -2,6 +2,7 @@
 ///
 /// Boots the Hospice Clinical App, applying the global theme and route
 /// configuration from `AppTheme` and `AppRouter`.
+library;
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'core/routing/app_router.dart';

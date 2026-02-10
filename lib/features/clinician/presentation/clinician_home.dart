@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../shared/widgets/app_shell.dart';
 import 'doctor_dashboard.dart';
-
+import '../../ehr/presentation/patient_list_screen.dart';
 /// Landing shell for clinician users.
 ///
 /// Uses `AppShell` to provide a consistent bottom navigation bar and
@@ -15,7 +15,7 @@ class ClinicianHome extends StatelessWidget {
     return AppShell(
       pages: const [
         DoctorDashboard(),
-        Center(child: Text('Patients')),
+        PatientListScreen(),
         Center(child: Text('Schedule')),
         Center(child: Text('Profile')),
       ],
