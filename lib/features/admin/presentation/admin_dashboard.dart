@@ -1,4 +1,7 @@
-
+/// Admin area dashboard and management entry point.
+///
+/// Hosts administrative features; keep this file focused on presentation
+/// only, and move complex logic to dedicated controllers/services.
 import 'package:flutter/material.dart';
 
 class AdminDashboard extends StatelessWidget {

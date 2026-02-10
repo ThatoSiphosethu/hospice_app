@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Dashboard shown to patients with their personalized information.
+///
+/// Replace the body with real patient data widgets (e.g., vitals, messages,
+/// upcoming appointments) as the feature is implemented.
 class PatientDashboard extends StatelessWidget {
   
   const PatientDashboard({super.key});

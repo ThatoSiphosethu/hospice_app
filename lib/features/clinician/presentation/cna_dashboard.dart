@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Dashboard for CNAs (Certified Nursing Assistants).
+///
+/// Contains quick access to patient care lists and shift tasks. Keep
+/// presentation separate from business logic to make testing straightforward.
 class CNADashboard extends StatelessWidget {
 
   const CNADashboard({super.key});

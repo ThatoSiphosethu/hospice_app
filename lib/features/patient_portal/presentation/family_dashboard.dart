@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Family-facing dashboard screen.
+///
+/// Shows information relevant to family members such as patient status and
+/// messages. This is a self-contained presentation widget.
 class FamilyDashboard extends StatelessWidget {
 
   const FamilyDashboard({super.key});
