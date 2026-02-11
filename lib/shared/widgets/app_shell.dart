@@ -48,13 +48,13 @@ class _AppShellState extends State<AppShell> {
         ),
       ),
       bottomNavigationBar: 
-      Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16, 
-          vertical: 8),
+      SafeArea(
+        child: Container(
+        padding: const EdgeInsets.only(left: 20, top: 0, right: 20, bottom: 10),
+        //positioned: const Offset(0, 0),
         decoration: BoxDecoration(
           color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
@@ -65,7 +65,7 @@ class _AppShellState extends State<AppShell> {
         ),
 
         child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.circular(20),
         child: BottomNavigationBar(
           // Keep the BottomNavigationBar in sync with the selected index.
           backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
@@ -80,7 +80,7 @@ class _AppShellState extends State<AppShell> {
         ),
       ),
       ), 
-      
+      ),
       
     );
   }
