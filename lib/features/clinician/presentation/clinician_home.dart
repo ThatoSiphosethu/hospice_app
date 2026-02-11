@@ -19,6 +19,15 @@ class ClinicianHome extends StatelessWidget {
         Center(child: Text('Schedule')),
         Center(child: Text('Profile')),
       ],
+
+      // NEW — titles for AppBar
+      titles: const [
+        'Dashboard',
+        'Patients',
+        'Schedule',
+        'Profile',
+      ],
+      
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

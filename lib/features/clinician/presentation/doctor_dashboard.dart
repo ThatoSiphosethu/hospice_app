@@ -11,9 +11,7 @@ class DoctorDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Doctor Dashboard'),
-      ),
+     
       body: Center(
         child: Text('Welcome to the Doctor Dashboard!'),
       ),

@@ -66,7 +66,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
     return Card(
       child: ListTile(
         title: Text(p.name),
-        subtitle: Text('${p.diagnosis}'),
+        subtitle: Text(p.diagnosis),
         trailing: StatusBadge(status: p.status),
         onTap: () {
           Navigator.push(
@@ -83,7 +83,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Patients')),
+     // appBar: AppBar(title: const Text('Patients')),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
