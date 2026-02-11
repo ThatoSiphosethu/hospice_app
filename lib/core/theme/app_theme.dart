@@ -8,14 +8,22 @@ class AppTheme {
       // App background
       scaffoldBackgroundColor: Colors.grey[100],
 
-      // ⭐ Bottom Nav Styling
+      // Card styling
+      cardTheme: CardThemeData(
+        color: Colors.pinkAccent,
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+        ),
+      ),
+
+      // Bottom Nav Styling
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: Colors.deepPurpleAccent,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
-        
       ),
 
       appBarTheme: const AppBarTheme(
