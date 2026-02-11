@@ -10,15 +10,16 @@ class AppTheme {
 
       // ⭐ Bottom Nav Styling
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Color(0xFF0D47A1), // Deep medical blue
+        backgroundColor: Colors.deepPurpleAccent,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
-        showUnselectedLabels: true,
+        showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
+        
       ),
 
       appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xFF1565C0),
+        backgroundColor: Colors.deepPurpleAccent,
         foregroundColor: Colors.white,
         elevation: 0,
       ),

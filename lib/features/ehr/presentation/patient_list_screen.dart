@@ -1,11 +1,15 @@
-// Screen that will list patients from the EHR module.
-//
-// TODO: Populate with a paginated list and search/filter controls. This
-// placeholder marks the file's purpose for future implementation.
+
+// Screen that lists patients from the EHR module
 import 'package:flutter/material.dart';
+
 import '../domain/patient.dart';
 import '../data/patient_repository.dart';
 import 'patient_profile_screen.dart';
+
+import '../../../shared/widgets/buttons.dart';
+import '../../../shared/widgets/scroll_container.dart';
+import '../../../shared/widgets/search_bar.dart';
+import '../../../shared/widgets/status_badge.dart';
 
 class PatientListScreen extends StatefulWidget {
   const PatientListScreen({super.key});
@@ -15,87 +19,105 @@ class PatientListScreen extends StatefulWidget {
 }
 
 class _PatientListScreenState extends State<PatientListScreen> {
+  final repo = MockPatientRepository();
+
+  final TextEditingController searchController =
+      TextEditingController();
+
   List<Patient> patients = [];
   List<Patient> filtered = [];
 
-final repo = MockPatientRepository();
   @override
   void initState() {
     super.initState();
     _loadPatients();
   }
 
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
   void _loadPatients() async {
     final loaded = await repo.fetchPatients();
+
     setState(() {
       patients = loaded;
-      filtered = patients;
+      filtered = loaded;
     });
   }
 
-  void _search(String query) {
+  void _filterPatients(String query) {
+    final results = patients.where((p) {
+      final q = query.toLowerCase();
+
+      return p.name.toLowerCase().contains(q) ||
+          p.diagnosis.toLowerCase().contains(q) ||
+          p.status.toLowerCase().contains(q);
+    }).toList();
+
     setState(() {
-      filtered = patients
-          .where((p) =>
-              p.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      filtered = results;
     });
+  }
+
+  Widget _buildPatientCard(Patient p) {
+    return Card(
+      child: ListTile(
+        title: Text(p.name),
+        subtitle: Text('${p.diagnosis}'),
+        trailing: StatusBadge(status: p.status),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => PatientProfileScreen(patient: p),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Patients')),
-      body: Column(
-        children: [
+      body: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
 
-          // 🔍 Search
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: TextField(
-              onChanged: _search,
-              decoration: InputDecoration(
-                hintText: 'Search patients...',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+            // 🔍 Search
+            SearchBarWidget(
+              controller: searchController,
+              onChanged: _filterPatients,
             ),
-          ),
 
-          // 📋 Patient List
-          Expanded(
-            child: ListView.builder(
-              itemCount: filtered.length,
-              itemBuilder: (context, index) {
-                final p = filtered[index];
+            const SizedBox(height: 12),
 
-                return Card(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 6),
-                  child: ListTile(
-                    title: Text(p.name),
-                    subtitle: Text(
-                        '${p.diagnosis} • ${p.status}'),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      // We'll wire navigation next
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => PatientProfileScreen(patient: p),
-                        ),
-                      );
-                    },
-                  ),
-                );
+            // Add Button
+            AppButton(
+              text: "Add Patient",
+              icon: Icons.add,
+              onPressed: () {
+                // Hook up form screen later
               },
             ),
-          ),
-        ],
+
+            const SizedBox(height: 12),
+
+            //  Scrollable List
+            ScrollContainer(
+              children: filtered
+                  .map((p) => _buildPatientCard(p))
+                  .toList(),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+

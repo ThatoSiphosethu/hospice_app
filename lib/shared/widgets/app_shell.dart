@@ -47,7 +47,24 @@ class _AppShellState extends State<AppShell> {
           child: widget.pages[_currentIndex],
         ),
       ),
-      bottomNavigationBar: ClipRRect(
+      bottomNavigationBar: 
+      Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16, 
+          vertical: 8),
+        decoration: BoxDecoration(
+          color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+
+        child: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         child: BottomNavigationBar(
           // Keep the BottomNavigationBar in sync with the selected index.
@@ -62,6 +79,9 @@ class _AppShellState extends State<AppShell> {
           },
         ),
       ),
+      ), 
+      
+      
     );
   }
 }
