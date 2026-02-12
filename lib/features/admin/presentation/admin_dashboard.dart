@@ -17,6 +17,8 @@ class AdminDashboard extends StatelessWidget {
       ),
       body: Center(
         child: Text('Welcome to the Admin Dashboard!'),
+
+        // Admin-specific UI components would go here. For example, you might have sections for user management, system settings, and analytics.
       ),
     );
   }

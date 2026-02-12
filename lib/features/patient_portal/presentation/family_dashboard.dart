@@ -16,6 +16,13 @@ class FamilyDashboard extends StatelessWidget {
       ),
       body: Center(
         child: Text('Welcome to the Family Dashboard!'),
+
+        // Additional UI components would go here.
+        // For example, you might have a list of patients, recent messages, or status updates.
+        // Caregiver-specific information and actions could also be included, such as appointment scheduling or medication reminders.
+        // Visitors could also have access to educational resources or support group information relevant to their loved ones' conditions.
+        // Patient schedules and care plans could be displayed, allowing family members to stay informed and involved in the patient's care.
+
       ),
     );
   }

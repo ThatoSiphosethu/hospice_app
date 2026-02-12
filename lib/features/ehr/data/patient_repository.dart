@@ -19,18 +19,21 @@ class MockPatientRepository
       Patient(
         id: '1',
         name: 'John Smith',
+        age: 72,
         diagnosis: 'Congestive Heart Failure',
-        status: 'Active',
+        status: 'Active', 
       ),
       Patient(
         id: '2',
         name: 'Mary Jones',
+        age: 65,
         diagnosis: 'Stage IV Cancer',
-        status: 'Active',
+        status: 'Active', 
       ),
       Patient(
         id: '3',
         name: 'Robert Lee',
+        age: 78,
         diagnosis: 'COPD',
         status: 'Discharged',
       ),

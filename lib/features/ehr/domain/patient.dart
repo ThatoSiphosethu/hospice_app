@@ -6,12 +6,14 @@
 class Patient {
   final String id;
   final String name;
+  final int age; // Placeholder, calculate from DOB when implemented
   final String diagnosis;
   final String status;
 
   Patient({
     required this.id,
     required this.name,
+    required this.age,
     required this.diagnosis,
     required this.status,
   });

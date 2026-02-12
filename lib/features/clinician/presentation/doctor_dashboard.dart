@@ -14,6 +14,8 @@ class DoctorDashboard extends StatelessWidget {
      
       body: Center(
         child: Text('Welcome to the Doctor Dashboard!'),
+
+        // Doctor-specific UI components would go here. For example, you might have a list of assigned patients, upcoming tasks, or alerts relevant to the doctor's responsibilities.
       ),
     );
   }
