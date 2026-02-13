@@ -10,7 +10,7 @@ class AppTheme {
 
       // Card styling
       cardTheme: CardThemeData(
-        color: Colors.pinkAccent,
+        color: Colors.grey[50],
         elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
@@ -19,7 +19,7 @@ class AppTheme {
 
       // Bottom Nav Styling
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.blueGrey,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
         showUnselectedLabels: false,
@@ -27,7 +27,7 @@ class AppTheme {
       ),
 
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.blueGrey,
         foregroundColor: Colors.white,
         elevation: 0,
       ),
