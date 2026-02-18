@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../shared/widgets/app_shell.dart';
-import 'doctor_dashboard.dart';
+import 'cna_dashboard.dart';
 import '../../ehr/presentation/patient_list_screen.dart';
+
 /// Landing shell for clinician users.
 ///
 /// Uses `AppShell` to provide a consistent bottom navigation bar and
@@ -14,37 +15,23 @@ class ClinicianHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppShell(
       pages: const [
-        DoctorDashboard(),
+        CNADashboard(),
         PatientListScreen(),
         Center(child: Text('Schedule')),
         Center(child: Text('Profile')),
       ],
 
       // NEW — titles for AppBar
-      titles: const [
-        'Dashboard',
-        'Patients',
-        'Schedule',
-        'Profile',
-      ],
-      
+      titles: const ['Dashboard', 'Patients', 'Schedule', 'Profile'],
+
       items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.people),
-          label: 'Patients',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Patients'),
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_today),
           label: 'Schedule',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );
   }
