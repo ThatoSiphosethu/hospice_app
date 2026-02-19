@@ -7,7 +7,6 @@ import 'package:hospice_app/features/ehr/domain/patient.dart';
 
 import '../../features/admin/presentation/admin_dashboard.dart';
 import '../../features/clinician/presentation/cna_dashboard.dart';
-import '../../features/patient_portal/presentation/patient_dashboard.dart';
 import '../../features/patient_portal/presentation/family_dashboard.dart';
 import '../../features/clinician/presentation/clinician_home.dart';
 import '../../features/ehr/presentation/clinical_notes_screen.dart';
@@ -19,7 +18,6 @@ class AppRouter {
     '/': (context) => const ClinicianHome(),
     '/admin': (context) => const AdminDashboard(),
     '/cna': (context) => const CNADashboard(),
-    '/patient': (context) => const PatientDashboard(),
     '/family': (context) => const FamilyDashboard(),
     '/notes': (context) {
       final patient =

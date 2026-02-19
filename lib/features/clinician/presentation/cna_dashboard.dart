@@ -41,7 +41,18 @@ class _CNADashboardState extends State<CNADashboard> {
               children: [
                 /// Greeting
                 const Text(
-                  "Good Morning 👋",
+                  "Good Morning 👋 ", 
+
+                  // Dynamic greeting based on time of day to be implemented later
+
+                  // Style: Larger, friendly font
+
+                  // Color: Use theme's primary color for warmth
+
+                  // Spacing: Add some vertical space below the greeting
+
+                  // Consider adding the CNA's name if available for a more personalized touch
+
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
