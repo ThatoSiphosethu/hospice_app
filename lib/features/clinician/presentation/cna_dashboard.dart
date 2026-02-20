@@ -3,7 +3,8 @@ import 'package:hospice_app/shared/widgets/cards/shift_status_card.dart';
 import 'package:hospice_app/shared/widgets/cards/next_visit_card.dart';
 import 'package:hospice_app/shared/widgets/cards/visit_tile.dart';
 import 'package:hospice_app/features/scheduling/data/mock_visit_repository.dart';
-import 'package:hospice_app/features/scheduling/domain/visit_.dart';
+import 'package:hospice_app/features/scheduling/domain/visit.dart';
+import 'package:hospice_app/features/visit/presentation/visit_mode_screen.dart';
 
 class CNADashboard extends StatefulWidget {
   const CNADashboard({super.key});
@@ -14,6 +15,17 @@ class CNADashboard extends StatefulWidget {
 
 class _CNADashboardState extends State<CNADashboard> {
   late Future<List<Visit>> _visitsFuture;
+
+  Future<List<Visit>> _refreshVisits(Visit updatedVisit) async {
+    final visits = await MockVisitRepository().getTodayVisits();
+
+    return visits.map((visit) {
+      if (visit.id == updatedVisit.id) {
+        return updatedVisit;
+      }
+      return visit;
+    }).toList();
+  }
 
   @override
   void initState() {
@@ -41,7 +53,7 @@ class _CNADashboardState extends State<CNADashboard> {
               children: [
                 /// Greeting
                 const Text(
-                  "Good Morning 👋 ", 
+                  "Good Morning 👋 ",
 
                   // Dynamic greeting based on time of day to be implemented later
 
@@ -52,7 +64,6 @@ class _CNADashboardState extends State<CNADashboard> {
                   // Spacing: Add some vertical space below the greeting
 
                   // Consider adding the CNA's name if available for a more personalized touch
-
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
@@ -72,7 +83,20 @@ class _CNADashboardState extends State<CNADashboard> {
                     patientName: nextVisit.patient.name,
                     time: _formatTime(nextVisit.scheduledTime),
                     address: nextVisit.patient.address ?? "",
-                    onStart: () {},
+                    onStart: () async {
+                      final updatedVisit = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => VisitModeScreen(visit: nextVisit),
+                        ),
+                      );
+
+                      if (updatedVisit != null) {
+                        setState(() {
+                          _visitsFuture = _refreshVisits(updatedVisit);
+                        });
+                      }
+                    },
                   ),
 
                 const SizedBox(height: 24),
@@ -80,18 +104,28 @@ class _CNADashboardState extends State<CNADashboard> {
                 /// Today's Visits Title
                 const Text(
                   "Today's Visits",
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
 
                 /// Dynamic Visit List
                 ...visits.map(
                   (visit) => VisitTile(
-                    patientName: visit.patient.name,
-                    time: _formatTime(visit.scheduledTime),
-                    address: visit.patient.address ?? "",
-                    onTap: () {},
+                    visit: visit,
+                    onTap: () async {
+                      final updatedVisit = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => VisitModeScreen(visit: visit),
+                        ),
+                      );
+
+                      if (updatedVisit != null) {
+                        setState(() {
+                          _visitsFuture = _refreshVisits(updatedVisit);
+                        });
+                      }
+                    },
                   ),
                 ),
               ],

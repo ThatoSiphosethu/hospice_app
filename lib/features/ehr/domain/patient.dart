@@ -3,6 +3,9 @@
 // TODO: Define fields such as `id`, `name`, `dob`, `medicalRecordNumber`,
 // and any serialization helpers (fromJson/toJson) when implementing the EHR
 // domain layer.
+
+enum PatientStatus { active, discharged }
+
 class Patient {
   final String id;
   final String name;

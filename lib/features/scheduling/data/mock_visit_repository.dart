@@ -2,7 +2,7 @@
 library;
 
 import 'package:hospice_app/features/ehr/data/patient_repository.dart';
-import 'package:hospice_app/features/scheduling/domain/visit_.dart';
+import 'package:hospice_app/features/scheduling/domain/visit.dart'; // Unused in current implementation
 
 class MockVisitRepository {
   final _patientRepo = MockPatientRepository();

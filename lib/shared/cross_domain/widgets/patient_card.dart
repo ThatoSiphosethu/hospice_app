@@ -11,6 +11,7 @@ class PatientCard extends StatelessWidget {
     super.key,
     required this.patient,
     required this.onTap,
+    
   });
 
   @override

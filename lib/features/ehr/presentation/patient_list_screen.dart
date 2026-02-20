@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:hospice_app/features/ehr/presentation/patient_profile_screen.dart';
 import 'package:hospice_app/shared/cross_domain/widgets/patient_card.dart';
-import 'package:hospice_app/shared/widgets/buttons.dart';
+//import 'package:hospice_app/shared/widgets/buttons.dart';
 import 'package:hospice_app/shared/widgets/scroll_container.dart';
 import 'package:hospice_app/shared/widgets/search_bar.dart';
 
@@ -78,13 +78,13 @@ class _PatientListScreenState extends State<PatientListScreen> {
                 const SizedBox(height: 12),
 
                 // Add Button
-                AppButton(
-                  text: "Add Patient",
-                  icon: Icons.add,
-                  onPressed: () {
+               // AppButton(
+                 // text: "Add Patient",
+                 // icon: Icons.add,
+                 // onPressed: () {
                     // Hook up form screen later
-                  },
-                ),
+                  //},
+                //),
 
                 const SizedBox(height: 12),
 

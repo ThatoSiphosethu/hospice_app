@@ -1,6 +1,9 @@
+/// Visit domain model for scheduling.
+library;
+
 import 'package:hospice_app/features/ehr/domain/patient.dart';
 
-enum VisitStatus { scheduled, inProgress, completed }
+enum VisitStatus { scheduled, inProgress, completed, cancelled }
 
 class Visit {
   final String id;
@@ -8,7 +11,7 @@ class Visit {
   final DateTime scheduledTime;
   final VisitStatus status;
 
-  const Visit({
+  Visit({
     required this.id,
     required this.patient,
     required this.scheduledTime,
@@ -16,12 +19,15 @@ class Visit {
   });
 
   Visit copyWith({
+    String? id,
+    Patient? patient,
+    DateTime? scheduledTime,
     VisitStatus? status,
   }) {
     return Visit(
-      id: id,
-      patient: patient,
-      scheduledTime: scheduledTime,
+      id: id ?? this.id,
+      patient: patient ?? this.patient,
+      scheduledTime: scheduledTime ?? this.scheduledTime,
       status: status ?? this.status,
     );
   }
