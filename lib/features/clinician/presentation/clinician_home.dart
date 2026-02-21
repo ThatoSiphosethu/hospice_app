@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '/features/visit/presentation/cna_shedule.dart';
 import '../../../shared/widgets/app_shell.dart';
 import 'cna_dashboard.dart';
 import '../../ehr/presentation/patient_list_screen.dart';
+
 
 /// Landing shell for clinician users.
 ///
@@ -17,7 +19,7 @@ class ClinicianHome extends StatelessWidget {
       pages: const [
         CNADashboard(),
         PatientListScreen(),
-        Center(child: Text('Schedule')),
+        CNAScheduleScreen(shifts: []), // Pass actual shifts in real implementation
         Center(child: Text('Profile')),
       ],
 
@@ -27,10 +29,7 @@ class ClinicianHome extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Patients'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_today),
-          label: 'Schedule',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.calendar_today),label: 'Schedule',),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );
