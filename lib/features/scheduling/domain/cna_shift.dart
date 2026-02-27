@@ -2,11 +2,11 @@ enum ShiftType { morning, evening, night, onCall, inPerson, remote }
 
 class WorkShift {
   final DateTime date;
-  final int startHour; // e.g., 07 for 7 AM
-  final int duration;  // e.g., 8 for an 8-hour shift
-  final String location; // e.g., "Unit 4 - Hospice Wing"
+  final int startHour;
+  final int duration;
+  final String location;
   final ShiftType type;
-  final List<String> primaryTasks; // e.g., ["Vitals", "ADLs", "Turning"]
+  final List<String> primaryTasks;
 
   WorkShift({
     required this.date,
@@ -14,6 +14,17 @@ class WorkShift {
     required this.duration,
     required this.location,
     required this.type,
-    this.primaryTasks = const [],
+    required this.primaryTasks,
   });
+
+  factory WorkShift.empty(DateTime date) {
+    return WorkShift(
+      date: date,
+      startHour: -1,
+      duration: 0,
+      location: '',
+      type: ShiftType.onCall,
+      primaryTasks: [],
+    );
+  }
 }
