@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../domain/patient.dart';
-import '../domain/medication.dart';
+import '../../domain/patient.dart';
+import '../../domain/medication.dart';
 
 class MedicationScreen extends StatelessWidget {
   final Patient patient;
