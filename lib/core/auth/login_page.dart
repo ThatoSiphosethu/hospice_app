@@ -11,21 +11,40 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // In a real app, the role is determined by the email/database, 
+  // In a real app, the role is determined by the email/database,
   // but we can add a toggle for testing purposes.
   UserRole _selectedRole = UserRole.caregiver;
 
-  void _handleLogin() {
+  // Controllers for input fields
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+// Simple loading state for demonstration (not connected to real auth logic)
+  bool _loading = false;
+
+  void _handleLogin() async {
     // Logic to navigate based on role
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Please enter credentials")));
+      return;
+    }
+
+    setState(() => _loading = true);
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() => _loading = false);
+
     switch (_selectedRole) {
       case UserRole.admin:
-        Navigator.pushReplacementNamed(context, '/admin_dashboard');
+        Navigator.pushReplacementNamed(context, '/admin');
         break;
       case UserRole.caregiver:
-        Navigator.pushReplacementNamed(context, '/cna_schedule');
+        Navigator.pushReplacementNamed(context, '/cna');
         break;
       case UserRole.relative:
-        Navigator.pushReplacementNamed(context, '/relative_portal');
+        Navigator.pushReplacementNamed(context, '/family');
         break;
     }
   }
@@ -39,12 +58,20 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
           child: Column(
             children: [
-              const Icon(Icons.shield_moon_outlined, color: Colors.blue, size: 70),
+              const Icon(
+                Icons.shield_moon_outlined,
+                color: Colors.blue,
+                size: 70,
+              ),
               const SizedBox(height: 16),
-              const Text("Hospice Connect", 
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800)),
-              const Text("Select your portal to continue", 
-                style: TextStyle(color: Colors.grey)),
+              const Text(
+                "Hospice Connect",
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800),
+              ),
+              const Text(
+                "Select your portal to continue",
+                style: TextStyle(color: Colors.grey),
+              ),
               const SizedBox(height: 40),
 
               // Role Selector Tabs for better UI
@@ -56,14 +83,18 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
-                        labelText: '${_selectedRole.name.toUpperCase()} ID or Email',
+                        labelText:
+                            '${_selectedRole.name.toUpperCase()} ID or Email',
                         prefixIcon: const Icon(Icons.person_outline),
                         border: const OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const TextField(
+
+                    TextField(
+                      controller: passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Secure Password',
@@ -83,11 +114,18 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  onPressed: _handleLogin,
-                  child: Text("Access ${_selectedRole.name} Portal", 
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  onPressed: _loading ? null : _handleLogin,
+                  child: Text(
+                    "Access ${_selectedRole.name} Portal",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -115,13 +153,22 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: BoxDecoration(
                   color: isSelected ? Colors.white : Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: isSelected ? [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4)] : [],
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 4,
+                          ),
+                        ]
+                      : [],
                 ),
                 child: Center(
                   child: Text(
                     role.name[0].toUpperCase() + role.name.substring(1),
                     style: TextStyle(
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
                       color: isSelected ? Colors.blue : Colors.grey[600],
                     ),
                   ),
