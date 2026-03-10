@@ -12,6 +12,8 @@ import '../../features/ehr/presentation/screens/patient_notes_screen.dart';
 import '../../features/patient_portal/presentation/family_dashboard.dart';
 import '../../features/clinician/presentation/clinician_home.dart';
 import '../../features/ehr/presentation/screens/medication_screen.dart';
+import '../../features/ehr/presentation/screens/care_plan_screen.dart';
+import '../../features/ehr/presentation/screens/hospitalizations_screen.dart';
 
 class AppRouter {
   /// Named routes used throughout the app.
@@ -32,5 +34,13 @@ class AppRouter {
       final patient = ModalRoute.of(context)!.settings.arguments as Patient;
       return PatientNotesScreen(patient: patient);
     },
+    '/care-plan': (context) {
+      final patient = ModalRoute.of(context)!.settings.arguments as Patient;
+      return CarePlanScreen(patient: patient);
+    },
+    '/hospitalizations': (context) {
+      final patient = ModalRoute.of(context)!.settings.arguments as Patient;
+      return HospitalizationsScreen(patient: patient);
+    }
   };
 }
