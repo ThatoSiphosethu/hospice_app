@@ -6,7 +6,7 @@ class AppTheme {
       primarySwatch: Colors.blue,
 
       // App background
-      scaffoldBackgroundColor: Colors.lightBlueAccent[100],
+      scaffoldBackgroundColor: const Color.fromARGB(255, 179, 229, 250),
 
       // Card styling
       cardTheme: CardThemeData(

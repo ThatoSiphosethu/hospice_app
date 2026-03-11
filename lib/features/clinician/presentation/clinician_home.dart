@@ -3,7 +3,7 @@ import '/features/visit/presentation/cna_shedule.dart';
 import '../../../shared/widgets/app_shell.dart';
 import 'cna_dashboard.dart';
 import '../../ehr/presentation/patient_list_screen.dart';
-
+import '../../profile/cna_profile_screen.dart';
 
 /// Landing shell for clinician users.
 ///
@@ -20,7 +20,7 @@ class ClinicianHome extends StatelessWidget {
         CNADashboard(),
         PatientListScreen(),
         CNAScheduleScreen(shifts: []), // Pass actual shifts in real implementation
-        Center(child: Text('Profile')),
+        CNAProfileScreen(),
       ],
 
       // NEW — titles for AppBar

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hospice_app/shared/widgets/body_card.dart';
-
+import '../auth/auth_service.dart';
 import '../../features/ehr/domain/user_role.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,7 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // In a real app, the role is determined by the email/database,
+  final AuthService _authService = AuthService();
   // but we can add a toggle for testing purposes.
   UserRole _selectedRole = UserRole.caregiver;
 
@@ -20,29 +20,38 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-// Simple loading state for demonstration (not connected to real auth logic)
+  // Simple loading state for demonstration (not connected to real auth logic)
   bool _loading = false;
 
-  void _handleLogin() async {
-    // Logic to navigate based on role
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+  Future<void> _handleLogin() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text("Please enter credentials")));
+      ).showSnackBar(const SnackBar(content: Text("Enter credentials")));
       return;
     }
 
-    setState(() => _loading = true);
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() => _loading = false);
+    final user = await _authService.login(email, password);
 
-    switch (_selectedRole) {
+    if (user == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Invalid credentials")));
+      return;
+    }
+
+    switch (user.role) {
       case UserRole.admin:
         Navigator.pushReplacementNamed(context, '/admin');
         break;
+
       case UserRole.caregiver:
         Navigator.pushReplacementNamed(context, '/cna');
         break;
+
       case UserRole.relative:
         Navigator.pushReplacementNamed(context, '/family');
         break;
