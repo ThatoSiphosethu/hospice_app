@@ -15,6 +15,7 @@ class CNADashboard extends StatefulWidget {
 
 class _CNADashboardState extends State<CNADashboard> {
   late Future<List<Visit>> _visitsFuture;
+  int _selectedNavIndex = 0;
 
   Future<List<Visit>> _refreshVisits(Visit updatedVisit) async {
     final visits = await MockVisitRepository().getTodayVisits();
@@ -141,4 +142,7 @@ class _CNADashboardState extends State<CNADashboard> {
     final period = time.hour >= 12 ? "PM" : "AM";
     return "$hour:00 $period";
   }
+
+    
+
 }

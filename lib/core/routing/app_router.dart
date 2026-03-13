@@ -4,23 +4,27 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:hospice_app/features/clinician/presentation/cna_dashboard.dart';
 import 'package:hospice_app/features/ehr/domain/patient.dart';
 import '../../features/ehr/presentation/screens/emergency_contacts_screen.dart';
 import '../../features/admin/presentation/admin_dashboard.dart';
-import '../../features/clinician/presentation/cna_dashboard.dart';
+//import '../../features/clinician/presentation/cna_dashboard.dart';
 import '../../features/ehr/presentation/screens/patient_notes_screen.dart';
 import '../../features/patient_portal/presentation/family_dashboard.dart';
 import '../../features/clinician/presentation/clinician_home.dart';
 import '../../features/ehr/presentation/screens/medication_screen.dart';
 import '../../features/ehr/presentation/screens/care_plan_screen.dart';
 import '../../features/ehr/presentation/screens/hospitalizations_screen.dart';
+import '../../core/auth/login_page.dart';
 
 class AppRouter {
   /// Named routes used throughout the app.
   static final routes = <String, WidgetBuilder>{
-    '/': (context) => const ClinicianHome(),
+    '/login': (context) => const LoginPage(),
+    '/': (context) => const CNADashboard(),
     '/admin': (context) => const AdminDashboard(),
-    '/cna': (context) => const CNADashboard(),
+    '/cna': (context) => const ClinicianHome(),
+    //'/cna': (context) => const CNADashboard(),
     '/family': (context) => const FamilyDashboard(),
     '/emergency-contacts': (context) {
       final patient = ModalRoute.of(context)!.settings.arguments as Patient;

@@ -6,7 +6,7 @@ library;
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'core/routing/app_router.dart';
-//import 'core/auth/login_page.dart';
+import 'core/auth/login_page.dart';
 
 void main() {
   runApp(const HospiceApp());
@@ -25,7 +25,8 @@ class HospiceApp extends StatelessWidget {
       title: 'Hospice Clinical App',
       theme: AppTheme.lightTheme,
       routes: AppRouter.routes,
-      initialRoute: '/',
+      //initialRoute: '/',
+     initialRoute: '/login',
       debugShowCheckedModeBanner: false,
     );
   }
