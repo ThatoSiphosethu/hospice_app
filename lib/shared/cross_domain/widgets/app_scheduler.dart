@@ -152,7 +152,7 @@ class _AppSchedulerState extends State<AppScheduler> {
         SizedBox(width: 50, child: Text("$hour:00", style: const TextStyle(fontSize: 12))),
         Expanded(
           child: DragTarget<Appointment>(
-            onAccept: (data) => _updateSchedule(data, hour),
+            onAcceptWithDetails: (data) => _updateSchedule(data.data, hour),
             builder: (context, _, __) {
               return Container(
                 height: 60,
@@ -190,10 +190,10 @@ class _AppSchedulerState extends State<AppScheduler> {
                         e.date.month == dayDate.month).toList();
 
                     return DragTarget<Appointment>(
-                      onAccept: (data) {
+                      onAcceptWithDetails: (details) {
                         setState(() {
-                          data.startHour = hour;
-                          data.date = dayDate;
+                          details.data.startHour = hour;
+                          details.data.date = dayDate;
                         });
                       },
                       builder: (_, __, ___) => Container(

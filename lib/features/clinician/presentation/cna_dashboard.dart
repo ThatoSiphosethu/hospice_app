@@ -15,7 +15,6 @@ class CNADashboard extends StatefulWidget {
 
 class _CNADashboardState extends State<CNADashboard> {
   late Future<List<Visit>> _visitsFuture;
-  int _selectedNavIndex = 0;
 
   Future<List<Visit>> _refreshVisits(Visit updatedVisit) async {
     final visits = await MockVisitRepository().getTodayVisits();

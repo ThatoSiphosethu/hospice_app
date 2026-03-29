@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   // Simple loading state for demonstration (not connected to real auth logic)
-  bool _loading = false;
+  final bool _loading = false;
 
   Future<void> _handleLogin() async {
     final email = emailController.text.trim();
