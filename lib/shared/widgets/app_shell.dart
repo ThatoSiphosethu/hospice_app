@@ -33,8 +33,8 @@ class AppShell extends StatefulWidget {
 }
 
 class _AppShellState extends State<AppShell> {
-  // The currently selected tab index. Defaults to 1 to show the middle tab.
-  int _currentIndex = 1;
+  // The currently selected tab index. This is used to determine which page to show and which title to display.
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {

@@ -15,6 +15,7 @@ class CNADashboard extends StatefulWidget {
 
 class _CNADashboardState extends State<CNADashboard> {
   late Future<List<Visit>> _visitsFuture;
+  bool _isClockedIn = false; // Start clocked out
 
   Future<List<Visit>> _refreshVisits(Visit updatedVisit) async {
     final visits = await MockVisitRepository().getTodayVisits();
@@ -71,8 +72,12 @@ class _CNADashboardState extends State<CNADashboard> {
                 /// Shift Card
                 ShiftStatusCard(
                   shiftTime: "8:00 AM - 4:00 PM",
-                  isClockedIn: true,
-                  onToggle: () {},
+                  isClockedIn: _isClockedIn,
+                  onToggle: () {
+                    setState(() {
+                      _isClockedIn = !_isClockedIn;
+                    });
+                  },
                 ),
 
                 const SizedBox(height: 20),
