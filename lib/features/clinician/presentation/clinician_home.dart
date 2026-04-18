@@ -24,7 +24,7 @@ class ClinicianHome extends StatelessWidget {
       ],
 
       // NEW — titles for AppBar
-      titles: const ['Dashboard', 'Patients', 'Schedule', 'Profile'],
+      titles: const ['Hospice Care', 'Patients', 'Schedule', 'Profile'],
 
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

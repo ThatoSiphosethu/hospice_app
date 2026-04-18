@@ -64,6 +64,7 @@ class _AppShellState extends State<AppShell> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 centerTitle: true,
+                automaticallyImplyLeading: _currentIndex != 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
