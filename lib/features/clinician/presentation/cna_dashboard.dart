@@ -5,9 +5,18 @@ import 'package:hospice_app/shared/widgets/cards/visit_tile.dart';
 import 'package:hospice_app/features/scheduling/data/mock_visit_repository.dart';
 import 'package:hospice_app/features/scheduling/domain/visit.dart';
 import 'package:hospice_app/features/visit/presentation/visit_mode_screen.dart';
+import '../../../core/auth/auth_session.dart';
 
 class CNADashboard extends StatefulWidget {
   const CNADashboard({super.key});
+
+  String get greeting {
+    final hour = DateTime.now().hour;
+
+    if (hour < 12) return "Good Morning";
+    if (hour < 17) return "Good Afternoon";
+    return "Good Evening";
+  }
 
   @override
   State<CNADashboard> createState() => _CNADashboardState();
@@ -53,25 +62,20 @@ class _CNADashboardState extends State<CNADashboard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// Greeting
-                const Text(
-                  "Good Morning 👋 ",
+                Text(
+                  "${widget.greeting}, ${AuthSession.currentUser?.name ?? 'User'} 👋 ", 
 
                   // Dynamic greeting based on time of day to be implemented later
 
-                  // Style: Larger, friendly font
-
-                  // Color: Use theme's primary color for warmth
-
-                  // Spacing: Add some vertical space below the greeting
-
-                  // Consider adding the CNA's name if available for a more personalized touch
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+
+                
                 ),
                 const SizedBox(height: 20),
 
                 /// Shift Card
                 ShiftStatusCard(
-                  shiftTime: "8:00 AM - 4:00 PM",
+                  shiftTime: "08:00 - 16:00 ", // This can be made dynamic based on actual shift data  
                   isClockedIn: _isClockedIn,
                   onToggle: () {
                     setState(() {

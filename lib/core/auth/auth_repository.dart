@@ -19,7 +19,7 @@ class AuthRepository {
     if (email == "cna@hospice.com" && password == "cna") {
       return AuthUser(
         id: "2",
-        name: "CNA Staff",
+        name: "Thato Ramalepa",
         role: UserRole.caregiver,
       );
     }
