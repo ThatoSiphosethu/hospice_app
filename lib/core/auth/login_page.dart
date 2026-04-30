@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hospice_app/shared/widgets/body_card.dart';
 import '../auth/auth_service.dart';
+import '../auth/auth_session.dart';
 import '../../features/ehr/domain/user_role.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,7 +22,14 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   // Simple loading state for demonstration (not connected to real auth logic)
-  final bool _loading = false;
+  bool _loading = false;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   Future<void> _handleLogin() async {
     final email = emailController.text.trim();
@@ -34,7 +42,11 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
+    setState(() => _loading = true);
+
     final user = await _authService.login(email, password);
+
+    setState(() => _loading = false);
 
     if (user == null) {
       ScaffoldMessenger.of(
@@ -42,6 +54,16 @@ class _LoginPageState extends State<LoginPage> {
       ).showSnackBar(const SnackBar(content: Text("Invalid credentials")));
       return;
     }
+
+    if (user.role != _selectedRole) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(
+          content: Text("Account is not authorized for the selected portal.")));
+      return;
+    }
+
+    AuthSession.currentUser = user;
 
     switch (user.role) {
       case UserRole.admin:
@@ -129,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: _loading ? null : _handleLogin,
                   child: Text(
-                    "Access ${_selectedRole.name} Portal",
+                    "Access ${_selectedRole.name[0].toUpperCase() + _selectedRole.name.substring(1)} Portal",
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
